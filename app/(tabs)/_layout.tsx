@@ -43,7 +43,7 @@ const _Layout = () => {
                     backgroundColor: '#0f0d23',
                     borderRadius: 50,
                     marginHorizontal: 20,
-                    marginBottom: 40,
+                    marginBottom: 46,
                     height: 52,
                     position: 'absolute',
                     overflow: 'hidden',
