@@ -5,6 +5,8 @@ const useFetch = <T>(fetchFunction: () => Promise<T>, autoFetch = true) => {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState<Error | null>(null);
 
+    console.log("moviesError:", error)
+
     const fetchData = async () => {
         try {
             setLoading(true);
