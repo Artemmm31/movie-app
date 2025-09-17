@@ -3,6 +3,7 @@ import SearchBar from "@/components/SeacrhBar";
 import { icons } from "@/constants/icons";
 import { images } from "@/constants/images";
 import { fetchMovies } from "@/services/api";
+import { updateSearchCount } from "@/services/appWrite";
 import useFetch from "@/services/useFetch";
 import { useEffect, useState } from "react";
 import { ActivityIndicator, FlatList, Image, Text, View } from "react-native";
@@ -14,14 +15,17 @@ export default function Search() {
     query: searchQuery
   }), false);
   useEffect(() => {
-    const func = async () => {
+    const timeoutId = setTimeout(async () => {
       if(searchQuery.trim()) {
         await loadMovies();
+
+        if(movies && movies?.length > 0 && movies?.[0]) await updateSearchCount(searchQuery, movies[0])
       } else {
         reset();
       }
-    } 
-    func();
+    }, 500);
+
+    return () => clearTimeout(timeoutId);
   }, [searchQuery])
   return (
     <View className="flex-1 bg-primary">
